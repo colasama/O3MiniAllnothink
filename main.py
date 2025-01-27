@@ -6,7 +6,7 @@ from pkg.plugin.host import EventContext, PluginHost
 from . import util
 
 # 注册插件
-@register(name="URLMasker", description="Mask url to bypass", version="0.1", author="Antlt")
+@register(name="DeepSeekR1nothink", description="remove think info for DeepSeekR1 model", version="0.1", author="planecn")
 class URLMaskerPlugin(Plugin):
 
     # 插件加载时触发
