@@ -18,7 +18,8 @@ class URLMaskerPlugin(Plugin):
     @on(NormalMessageResponded)
     def group_normal_message_received(self, event: EventContext, **kwargs):
         msg = kwargs['response_text']
-        ret = removethink(msg)
+        ret = util.removethink(msg)
+        self.ap.logger.debug(ret)
         event.add_return('reply', ret)
         
 
