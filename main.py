@@ -20,12 +20,12 @@ class URLMaskerPlugin(Plugin):
         if len(ctx.event.prompt) != 0:
             for promptindex,promptcontent in enumerate(ctx.event.prompt):
                 if promptindex % 2 != 0:
-                    ctx.event.prompt[promptindex].content = re.sub(r'> Reasoning[\s\S]*?seconds\n\n', '', promptcontent.content)
+                    ctx.event.prompt[promptindex].content = re.sub(r'> Reasoning.*?seconds\n\n', '', promptcontent.content, flags=re.DOTALL)
 
     @on(NormalMessageResponded)
     def group_normal_message_received(self, event: EventContext, **kwargs):
         msg = kwargs['response_text']
-        ret = util.removethink(msg)
+        ret = re.sub(r'> Reasoning.*?seconds\n\n', '', msg, flags=re.DOTALL)
         event.add_return('reply', ret)
 
     # 插件卸载时触发
