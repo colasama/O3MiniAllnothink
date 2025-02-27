@@ -7,7 +7,7 @@ import re
 from . import util
 
 # 注册插件
-@register(name="DeepSeekR1nothink", description="remove think info for DeepSeekR1 model", version="0.1", author="planecn")
+@register(name="O3MiniAllnothink", description="remove think info for o3-mini-all model", version="0.1", author="planecn")
 class URLMaskerPlugin(Plugin):
 
     # 插件加载时触发
@@ -20,7 +20,7 @@ class URLMaskerPlugin(Plugin):
         if len(ctx.event.prompt) != 0:
             for promptindex,promptcontent in enumerate(ctx.event.prompt):
                 if promptindex % 2 != 0:
-                    ctx.event.prompt[promptindex].content = re.sub(r'<think>[\s\S]*?<\/think>\n\n', '', promptcontent.content)
+                    ctx.event.prompt[promptindex].content = re.sub(r'> Reasoning[\s\S]*?seconds\n\n', '', promptcontent.content)
 
     @on(NormalMessageResponded)
     def group_normal_message_received(self, event: EventContext, **kwargs):
